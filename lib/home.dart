@@ -8,18 +8,64 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-bool? isChecked1 = false;
-bool? isChecked2 = false;
-bool? isChecked3 = false;
-bool? isChecked4 = false;
-bool? isChecked5 = false;
-bool? isChecked6 = false;
-bool isBool1 = false;
-bool isBool2 = false;
-bool isBool3 = false;
-bool isBool4 = false;
-bool isBool5 = false;
-bool isBool6 = false;
+
+  List<Map<String, dynamic>> toDoItems = [
+    {
+      "time" : "8:00",
+      "name" : "Go to Church",
+      "timeType" : "AM",
+      "isChecked" : false,
+      "isBool" : false
+    },
+
+    {
+      "time" : "12:00",
+      "name" : "Cook for the family",
+      "timeType" : "PM",
+      "isChecked" : false,
+      "isBool" : false
+    },
+
+    {
+      "time" : "2:00",
+      "name" : "Wash my clothes",
+      "timeType" : "PM",
+      "isChecked" : false,
+      "isBool" : false
+    },
+
+    {
+      "time" : "5:00",
+      "name" : "Visit Chastity",
+      "timeType" : "PM",
+      "isChecked" : false,
+      "isBool" : false
+    },
+
+    {
+      "time" : "6:00",
+      "name" : "Make my hair",
+      "timeType" : "PM",
+      "isChecked" : false,
+      "isBool" : false
+    },
+
+    {
+      "time" : "8:00",
+      "name" : "Call my brother",
+      "timeType" : "PM",
+      "isChecked" : false,
+      "isBool" : false
+    },
+
+    {
+      "time" : "12:00",
+      "name" : "Play videogames",
+      "timeType" : "AM",
+      "isChecked" : false,
+      "isBool" : false
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -326,332 +372,65 @@ bool isBool6 = false;
             ),
 
             Expanded(
-              child: ListView(
-                children: [
+              child: ListView.builder(
+                itemCount: 7,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 13),
+                    child: Center(
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Color.fromARGB(255, 214, 214, 214), 
+                            style: BorderStyle.solid,),
+                        borderRadius: BorderRadius.circular(20)
+                        ),
+                        height: 72,
+                        width: 387,
+                        child: CheckboxListTile(
+                          value: toDoItems[index]["isChecked"], 
+                          onChanged: (value) {
+                            setState(() {
+                              toDoItems[index]["isChecked"] = value;
+                              if(value == null) {
 
-
-            
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: Center(
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 214, 214, 214), 
-                        style: BorderStyle.solid,),
-                    borderRadius: BorderRadius.circular(20)
-                    ),
-                    height: 72,
-                    width: 387,
-                    child: CheckboxListTile(
-                      value: isChecked1, 
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked1 = value;
-                          if(value == null) {
-
-                          } else if(value){
-                            isBool1 = true;
-                          } else if(value == false){
-                            isBool1 = false;
-                          }
-                           
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
-                      activeColor: Color.fromARGB(255, 223, 189, 67),
-                      title: Text('8:00 AM', style: TextStyle(fontSize: 13),),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 17, 0, 0),
-                        child: Text('Go to Church', 
-                          style: TextStyle(fontSize: 18, decoration: isBool1? TextDecoration.lineThrough: null),),
-                      ),
-                      secondary: Wrap(
-                            children: [
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.edit_note, color: Color.fromARGB(255, 223, 189, 67))),
-                      
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.delete, color: Color.fromARGB(255, 223, 189, 67))),
+                              } else if(value){
+                                toDoItems[index]["isBool"] = true;
+                              } else if(!value){
+                                toDoItems[index]["isBool"] = false;
+                              }
                               
-                            ],
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
+                          activeColor: Color.fromARGB(255, 223, 189, 67),
+                          title: Text(toDoItems[index]["time"] +  " " + toDoItems[index]["timeType"], style: TextStyle(fontSize: 13),),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 17, 0, 0),
+                            child: Text(toDoItems[index]["name"], 
+                              style: TextStyle(fontSize: 18, decoration: toDoItems[index]["isBool"]? TextDecoration.lineThrough: null),),
                           ),
+                          secondary: Wrap(
+                                children: [
+                                  IconButton(
+                                    onPressed: null, 
+                                    icon: Icon(Icons.edit_note, color: Color.fromARGB(255, 223, 189, 67))),
+                          
+                                  IconButton(
+                                    onPressed: null, 
+                                    icon: Icon(Icons.delete, color: Color.fromARGB(255, 223, 189, 67))),
+                                  
+                                ],
+                              ),
 
-      
-                          ),
-                  ),
-                ),
-              ),
-
-            
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
-                child: Center(
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 214, 214, 214), 
-                        style: BorderStyle.solid,),
-                    borderRadius: BorderRadius.circular(20)
+          
+                              ),
+                      ),
                     ),
-                    height: 72,
-                    width: 387,
-                    child: CheckboxListTile(
-                      value: isChecked2, 
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked2 = value;
-                          if(value == null) {
+                  );
+                }
+              )
 
-                          } else if(value){
-                            isBool2 = true;
-                          } else if(value == false){
-                            isBool2 = false;
-                          }
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
-                      activeColor: Color.fromARGB(255, 223, 189, 67),
-                      title: Text('12:00 PM', style: TextStyle(fontSize: 13),),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 17, 0, 0),
-                        child: Text('Cook for the family', 
-                          style: TextStyle(fontSize: 18, decoration: isBool2? TextDecoration.lineThrough: null),),
-                      ),
-                      secondary: Wrap(
-                            children: [
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.edit_note, color: Color.fromARGB(255, 223, 189, 67))),
-                      
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.delete, color: Color.fromARGB(255, 223, 189, 67))),
-                              
-                            ],
-                          ),
-
-      
-                          ),
-                  ),
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
-                child: Center(
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 214, 214, 214), 
-                        style: BorderStyle.solid,),
-                    borderRadius: BorderRadius.circular(20)
-                    ),
-                    height: 72,
-                    width: 387,
-                    child: CheckboxListTile(
-                      value: isChecked3, 
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked3 = value;
-                          if(value == null) {
-
-                          } else if(value){
-                            isBool3 = true;
-                          } else if(value == false){
-                            isBool3 = false;
-                          }
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
-                      activeColor: Color.fromARGB(255, 223, 189, 67),
-                      title: Text('2:00 PM', style: TextStyle(fontSize: 13),),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 17, 0, 0),
-                        child: Text('Wash my clothes', 
-                          style: TextStyle(fontSize: 18, decoration: isBool3? TextDecoration.lineThrough: null),),
-                      ),
-                      secondary: Wrap(
-                            children: [
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.edit_note, color: Color.fromARGB(255, 223, 189, 67))),
-                      
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.delete, color: Color.fromARGB(255, 223, 189, 67))),
-                              
-                            ],
-                          ),
-
-      
-                          ),
-                  ),
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
-                child: Center(
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 214, 214, 214), 
-                        style: BorderStyle.solid,),
-                    borderRadius: BorderRadius.circular(20)
-                    ),
-                    height: 72,
-                    width: 387,
-                    child: CheckboxListTile(
-                      value: isChecked4, 
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked4 = value;
-                          if(value == null) {
-
-                          } else if(value){
-                            isBool4 = true;
-                          } else if(value == false){
-                            isBool4 = false;
-                          }
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
-                      activeColor: Color.fromARGB(255, 223, 189, 67),
-                      title: Text('5:00 PM', style: TextStyle(fontSize: 13),),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 17, 0, 0),
-                        child: Text('Visit Chastity', 
-                          style: TextStyle(fontSize: 18, decoration: isBool4? TextDecoration.lineThrough: null),),
-                      ),
-                      secondary: Wrap(
-                            children: [
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.edit_note, color: Color.fromARGB(255, 223, 189, 67))),
-                      
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.delete, color: Color.fromARGB(255, 223, 189, 67))),
-                              
-                            ],
-                          ),
-
-      
-                          ),
-                  ),
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
-                child: Center(
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 214, 214, 214), 
-                        style: BorderStyle.solid,),
-                    borderRadius: BorderRadius.circular(20)
-                    ),
-                    height: 72,
-                    width: 387,
-                    child: CheckboxListTile(
-                      value: isChecked5, 
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked5 = value;
-                          if(value == null) {
-
-                          } else if(value){
-                            isBool5 = true;
-                          } else if(value == false){
-                            isBool5 = false;
-                          }
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
-                      activeColor: Color.fromARGB(255, 223, 189, 67),
-                      title: Text('6:00 PM', style: TextStyle(fontSize: 13),),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 17, 0, 0),
-                        child: Text('Make my hair', 
-                          style: TextStyle(fontSize: 18, decoration: isBool5? TextDecoration.lineThrough: null),),
-                      ),
-                      secondary: Wrap(
-                            children: [
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.edit_note, color: Color.fromARGB(255, 223, 189, 67))),
-                      
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.delete, color: Color.fromARGB(255, 223, 189, 67))),
-                              
-                            ],
-                          ),
-
-      
-                          ),
-                  ),
-                      ),
-                ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 13, 0, 30),
-                child: Center(
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 214, 214, 214), 
-                        style: BorderStyle.solid,),
-                    borderRadius: BorderRadius.circular(20)
-                    ),
-                    height: 72,
-                    width: 387,
-                    child: CheckboxListTile(
-                      value: isChecked6, 
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked6 = value;
-                          if(value == null) {
-
-                          } else if(value){
-                            isBool6 = true;
-                          } else if(value == false){
-                            isBool6 = false;
-                          }
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
-                      activeColor: Color.fromARGB(255, 223, 189, 67),
-                      title: Text('8:00 PM', style: TextStyle(fontSize: 13),),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 17, 0, 0),
-                        child: Text('Call my brother', 
-                          style: TextStyle(fontSize: 18, decoration: isBool6? TextDecoration.lineThrough: null),),
-                      ),
-                      secondary: Wrap(
-                            children: [
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.edit_note, color: Color.fromARGB(255, 223, 189, 67))),
-                      
-                              IconButton(
-                                onPressed: null, 
-                                icon: Icon(Icons.delete, color: Color.fromARGB(255, 223, 189, 67))),
-                              
-                            ],
-                          ),
-
-      
-                          ),
-                  ),
-                ),
-              ),
-
-              ],)
             )
 
             
