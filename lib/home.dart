@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -76,13 +78,13 @@ class _HomePageState extends State<HomePage> {
           
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(padding: EdgeInsets.fromLTRB(26, 70, 0, 0),
+            Padding(padding: EdgeInsets.fromLTRB(26.w, 45.h, 0, 0),
             child: CircleAvatar(child: Image.asset('assets/Face.png', scale: 0.70), radius: 40.0)
             ),
             
             Padding(padding: EdgeInsets.all(14),
               child: Container(
-                      child: Text('Good evening, Ivy', style: TextStyle(fontSize: 16),), 
+                      child: Text('Good evening, Ivy', style: TextStyle(fontSize: 16.sp),), 
                       color: Color.fromARGB(255, 245, 242, 232),
                       padding: EdgeInsets.all(5),
               
@@ -107,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                             
                             '5', 
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w400
                             ), 
@@ -122,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 16.h, 0, 0),
                         child: Text(
                           'Thur', 
                           style: TextStyle(
@@ -143,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                             
                             '6', 
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w400
                             ), 
@@ -158,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 16.h, 0, 0),
                         child: Text(
                           'Fri', 
                           style: TextStyle(
@@ -177,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                             
                             '7', 
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w400
                             ), 
@@ -192,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 16.h, 0, 0),
                         child: Text(
                           'Sat', 
                           style: TextStyle(
@@ -211,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                             
                             '8', 
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w400
                             ), 
@@ -226,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 16.h, 0, 0),
                         child: Text(
                           'Sun', 
                           style: TextStyle(
@@ -245,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                             
                             '9', 
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w400
                             ), 
@@ -260,7 +262,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 16.h, 0, 0),
                         child: Text(
                           'Mon', 
                           style: TextStyle(
@@ -279,7 +281,7 @@ class _HomePageState extends State<HomePage> {
                             
                             '10', 
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w400
                             ), 
@@ -294,7 +296,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 16.h, 0, 0),
                         child: Text(
                           'Tues', 
                           style: TextStyle(
@@ -313,7 +315,7 @@ class _HomePageState extends State<HomePage> {
                             
                             '11', 
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w400
                             ), 
@@ -328,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 16.h, 0, 0),
                         child: Text(
                           'Wed', 
                           style: TextStyle(
@@ -365,9 +367,9 @@ class _HomePageState extends State<HomePage> {
                       ),
             ),
 
-            Padding(padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
+            Padding(padding: EdgeInsets.fromLTRB(20.w, 15.h, 0, 0),
                         child: Text('Today\'s tasks', 
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                         ),
             ),
 
@@ -376,7 +378,7 @@ class _HomePageState extends State<HomePage> {
                 itemCount: 7,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 13),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 13.h),
                     child: Center(
                       child: Container(
                         alignment: Alignment.center,
@@ -404,11 +406,11 @@ class _HomePageState extends State<HomePage> {
                           },
                           controlAffinity: ListTileControlAffinity.leading,
                           activeColor: Color.fromARGB(255, 223, 189, 67),
-                          title: Text(toDoItems[index]["time"] +  " " + toDoItems[index]["timeType"], style: TextStyle(fontSize: 13),),
+                          title: Text(toDoItems[index]["time"] +  " " + toDoItems[index]["timeType"], style: TextStyle(fontSize: 13.sp),),
                           subtitle: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 17, 0, 0),
+                            padding: EdgeInsets.fromLTRB(0, 17, 0, 0),
                             child: Text(toDoItems[index]["name"], 
-                              style: TextStyle(fontSize: 18, decoration: toDoItems[index]["isBool"]? TextDecoration.lineThrough: null),),
+                              style: TextStyle(fontSize: 18.sp, decoration: toDoItems[index]["isBool"]? TextDecoration.lineThrough: null),),
                           ),
                           secondary: Wrap(
                                 children: [
@@ -431,6 +433,11 @@ class _HomePageState extends State<HomePage> {
                 }
               )
 
+            ),
+
+            SizedBox(
+              width: 800,
+              height: 20,
             )
 
             
