@@ -4,63 +4,59 @@ import 'package:flutter/material.dart';
 
 class ToDoListProvider extends ChangeNotifier {
 
+TimeOfDay _timeOfDay = TimeOfDay.now();
+
+bool timePressed = false;
  int itemCount = 7;
 
 final _textController = TextEditingController();
 
  final List<Map<String, dynamic>> toDoItems = [
     {
-      "time" : "8:00",
+      "time" : "8:00 AM",
       "name" : "Go to Church",
-      "timeType" : "AM",
       "isChecked" : false,
       "isBool" : false
     },
 
     {
-      "time" : "12:00",
+      "time" : "12:00 PM",
       "name" : "Cook for the family",
-      "timeType" : "PM",
       "isChecked" : false,
       "isBool" : false
     },
 
     {
-      "time" : "2:00",
+      "time" : "2:00 PM",
       "name" : "Wash my clothes",
-      "timeType" : "PM",
       "isChecked" : false,
       "isBool" : false
     },
 
     {
-      "time" : "5:00",
+      "time" : "5:00 PM",
       "name" : "Visit Chastity",
-      "timeType" : "PM",
       "isChecked" : false,
       "isBool" : false
     },
 
     {
-      "time" : "6:00",
+      "time" : "6:00 PM",
       "name" : "Make my hair",
-      "timeType" : "PM",
       "isChecked" : false,
       "isBool" : false
     },
 
     {
-      "time" : "8:00",
+      "time" : "8:00 PM",
       "name" : "Call my brother",
-      "timeType" : "PM",
       "isChecked" : false,
       "isBool" : false
     },
 
     {
-      "time" : "12:00",
+      "time" : "12:00 AM",
       "name" : "Play videogames",
-      "timeType" : "AM",
       "isChecked" : false,
       "isBool" : false
     }
@@ -70,6 +66,7 @@ final _textController = TextEditingController();
 
   void addItem(BuildContext context) {
 
+
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -78,21 +75,37 @@ final _textController = TextEditingController();
       ),
       context:  context, 
       builder: (context) {
-       return ListView(
+       return Column(
+        mainAxisSize: MainAxisSize.min,
         
         children: [
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "New Item", 
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 68, 68, 68)
-              ), 
-              
-            ),
+          Row(
+            children: [
+              Container(
+                width: 300,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "New Item", 
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 68, 68, 68)
+                    ), 
+                    
+                  ),
+                ),
+              ),
+
+              // Text(
+              //   _timeOfDay.format(context).toString(),
+              //   textAlign: TextAlign.end,
+              //   style: TextStyle(
+              //     fontSize: 20
+              //   ),
+              // )
+            ],
           ),
 
           Padding(
@@ -114,47 +127,69 @@ final _textController = TextEditingController();
           
             ),
 
-            TimePickerDialog(
-              initialEntryMode: TimePickerEntryMode.inputOnly,
-              cancelText: '',
-              confirmText: '',
-              initialTime: TimeOfDay.fromDateTime(
-                DateTime.now()
-              )
-            ),
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 8, 16, 8),
+            SizedBox(
+              width: 350,
               child: ElevatedButton(
-                onPressed: () {
-                  toDoItems.insert(
-                    0,
-                    {
-                      "time" : "Not Available",
-                      "name" : _textController.text,
-                      "timeType" : "Not Available",
-                     "isChecked" : false,
-                      "isBool" : false
-                    }
-                  );
+              
+              onPressed: () {
 
-                    itemCount++;
-                 
-                 Navigator.pop(context);
+                timePressed = true;
 
-                 notifyListeners();
-                }, 
-                child: Text(
-                  'Add',
-            
-                )
-                ),
+                showTimePicker(
+                      initialEntryMode: TimePickerEntryMode.inputOnly,
+                      context: context, 
+                      initialTime: TimeOfDay.now()
+                    ).then((value) {
+                      _timeOfDay = value!;
+                    });
+              }, 
+              child: Text("Add Custom Time")
+              ),
             ),
 
+            SizedBox(
+              width: 350,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0,0,0,32),
+                child: ElevatedButton(
+                  onPressed: () {
+                          
+                    
+                          
+                    toDoItems.insert(
+                      0,
+                      {
+                        "time" : timePressed? _timeOfDay.format(context).toString(): '',
+                        "name" : _textController.text,
+                       "isChecked" : false,
+                        "isBool" : false
+                      }
+                    );
+                          
+                  itemCount++;
+                  
+                  timePressed = false;
 
+                  _timeOfDay = TimeOfDay.now();
 
-
-          
+                  _textController.clear(); 
+                  
+                   Navigator.pop(context);
+                          
+                   notifyListeners();
+                  }, 
+                  child: Icon(
+                    
+                    Icons.done
+                  ),
+                  style: ButtonStyle(
+                    
+                    backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 223, 189, 67))
+                  ),
+                  ),
+              ),
+            ),
+      
 
         ],
        );
