@@ -318,7 +318,7 @@ class _HomePageState extends State<HomePage> {
 
             Expanded(
               child: ListView.builder(
-                itemCount: 7,
+                itemCount: Provider.of<ToDoListProvider>(context).itemCount,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 13.h),
@@ -366,7 +366,9 @@ class _HomePageState extends State<HomePage> {
                                     icon: Icon(Icons.edit_note, color: Color.fromARGB(255, 223, 189, 67))),
                           
                                   IconButton(
-                                    onPressed: null, 
+                                    onPressed: () {
+                                      Provider.of<ToDoListProvider>(context, listen: false).deleteItem(index);
+                                    }, 
                                     icon: Icon(Icons.delete, color: Color.fromARGB(255, 223, 189, 67))),
                                   
                                 ],
