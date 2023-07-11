@@ -353,7 +353,7 @@ class _HomePageState extends State<HomePage> {
                           },
                           controlAffinity: ListTileControlAffinity.leading,
                           activeColor: Color.fromARGB(255, 223, 189, 67),
-                          title: Text(Provider.of<ToDoListProvider>(context).toDoItems[index]["time"] +  " " + Provider.of<ToDoListProvider>(context).toDoItems[index]["timeType"], style: TextStyle(fontSize: 13.sp),),
+                          title: Text(Provider.of<ToDoListProvider>(context).toDoItems[index]["time"], style: TextStyle(fontSize: 13.sp),),
                           subtitle: Padding(
                             padding: EdgeInsets.fromLTRB(0, 17, 0, 0),
                             child: Text(Provider.of<ToDoListProvider>(context).toDoItems[index]["name"], 
@@ -367,6 +367,7 @@ class _HomePageState extends State<HomePage> {
                           
                                   IconButton(
                                     onPressed: () {
+                                      
                                       Provider.of<ToDoListProvider>(context, listen: false).deleteItem(index);
                                     }, 
                                     icon: Icon(Icons.delete, color: Color.fromARGB(255, 223, 189, 67))),
