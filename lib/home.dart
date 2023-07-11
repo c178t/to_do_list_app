@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:provider/provider.dart';
+import 'package:to_do_list_app/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,64 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  List<Map<String, dynamic>> toDoItems = [
-    {
-      "time" : "8:00",
-      "name" : "Go to Church",
-      "timeType" : "AM",
-      "isChecked" : false,
-      "isBool" : false
-    },
-
-    {
-      "time" : "12:00",
-      "name" : "Cook for the family",
-      "timeType" : "PM",
-      "isChecked" : false,
-      "isBool" : false
-    },
-
-    {
-      "time" : "2:00",
-      "name" : "Wash my clothes",
-      "timeType" : "PM",
-      "isChecked" : false,
-      "isBool" : false
-    },
-
-    {
-      "time" : "5:00",
-      "name" : "Visit Chastity",
-      "timeType" : "PM",
-      "isChecked" : false,
-      "isBool" : false
-    },
-
-    {
-      "time" : "6:00",
-      "name" : "Make my hair",
-      "timeType" : "PM",
-      "isChecked" : false,
-      "isBool" : false
-    },
-
-    {
-      "time" : "8:00",
-      "name" : "Call my brother",
-      "timeType" : "PM",
-      "isChecked" : false,
-      "isBool" : false
-    },
-
-    {
-      "time" : "12:00",
-      "name" : "Play videogames",
-      "timeType" : "AM",
-      "isChecked" : false,
-      "isBool" : false
-    }
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -390,27 +333,31 @@ class _HomePageState extends State<HomePage> {
                         height: 72,
                         width: 387,
                         child: CheckboxListTile(
-                          value: toDoItems[index]["isChecked"], 
+                          value: Provider.of<ToDoListProvider>(context).toDoItems[index]["isChecked"], 
                           onChanged: (value) {
-                            setState(() {
-                              toDoItems[index]["isChecked"] = value;
+                            
+                              Provider.of<ToDoListProvider>(context, listen: false).toDoItems[index]["isChecked"] = value;
+                              Provider.of<ToDoListProvider>(context, listen: false).notify();
+                              
                               if(value == null) {
 
                               } else if(value){
-                                toDoItems[index]["isBool"] = true;
+                                Provider.of<ToDoListProvider>(context, listen: false).toDoItems[index]["isBool"] = true;
+                                Provider.of<ToDoListProvider>(context, listen: false).notify();
                               } else if(!value){
-                                toDoItems[index]["isBool"] = false;
+                                Provider.of<ToDoListProvider>(context, listen: false).toDoItems[index]["isBool"] = false;
+                                Provider.of<ToDoListProvider>(context, listen: false).notify();
                               }
                               
-                            });
+                            
                           },
                           controlAffinity: ListTileControlAffinity.leading,
                           activeColor: Color.fromARGB(255, 223, 189, 67),
-                          title: Text(toDoItems[index]["time"] +  " " + toDoItems[index]["timeType"], style: TextStyle(fontSize: 13.sp),),
+                          title: Text(Provider.of<ToDoListProvider>(context).toDoItems[index]["time"] +  " " + Provider.of<ToDoListProvider>(context).toDoItems[index]["timeType"], style: TextStyle(fontSize: 13.sp),),
                           subtitle: Padding(
                             padding: EdgeInsets.fromLTRB(0, 17, 0, 0),
-                            child: Text(toDoItems[index]["name"], 
-                              style: TextStyle(fontSize: 18.sp, decoration: toDoItems[index]["isBool"]? TextDecoration.lineThrough: null),),
+                            child: Text(Provider.of<ToDoListProvider>(context).toDoItems[index]["name"], 
+                              style: TextStyle(fontSize: 18.sp, decoration: Provider.of<ToDoListProvider>(context).toDoItems[index]["isBool"]? TextDecoration.lineThrough: null),),
                           ),
                           secondary: Wrap(
                                 children: [
