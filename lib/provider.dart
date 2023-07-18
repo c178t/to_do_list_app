@@ -1,8 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 
 class ToDoListProvider extends ChangeNotifier {
+
+String setTime = '';
 
 TimeOfDay _timeOfDay = TimeOfDay.now();
 
@@ -68,6 +68,7 @@ final _textController = TextEditingController();
 
 
     showModalBottomSheet(
+      backgroundColor: Color.fromARGB(255, 255, 253, 244),
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -102,13 +103,13 @@ final _textController = TextEditingController();
                     ),
                   ),
                 
-                  // Text(
-                  //   _timeOfDay.format(context).toString(),
-                  //   textAlign: TextAlign.end,
-                  //   style: TextStyle(
-                  //     fontSize: 20
-                  //   ),
-                  // )
+                  Text(
+                    setTime,
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 20
+                    ),
+                  )
                 ],
               ),
                 
@@ -134,6 +135,11 @@ final _textController = TextEditingController();
                 SizedBox(
                   width: 350,
                   child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                                        Colors.white
+                                        )
+                    ),
                   
                   onPressed: () {
                 
@@ -144,10 +150,16 @@ final _textController = TextEditingController();
                           context: context, 
                           initialTime: TimeOfDay.now()
                         ).then((value) {
+                          
                           _timeOfDay = value!;
                         });
                   }, 
-                  child: Text("Add Custom Time")
+                  child: Text(
+                    "Add Custom Time",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 68, 68, 68)
+                    ),
+                  )
                   ),
                 ),
                 
@@ -158,27 +170,49 @@ final _textController = TextEditingController();
                     child: ElevatedButton(
                       onPressed: () {
                               
+                        if (_textController.text == '') {
+                          showDialog(
+                            context: context, 
+                            builder: (context) => AlertDialog(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                              title: Text('Name of item cannot be empty'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context), 
+                                  child: Text('OK')
+                                  )
+                              ],
+                              
+                            ),
+                          );
+                        } else {
+                            toDoItems.insert(
+                            0,
+                            {
+                              "time" : timePressed? _timeOfDay.format(context).toString(): '',
+                              "name" : _textController.text,
+                            "isChecked" : false,
+                              "isBool" : false
+                            }
+                          );
+                                
+                        if (timePressed) {
+                          setTime = _timeOfDay.format(context).toString();
+                        }
+
+
+                        itemCount++;
                         
+                        timePressed = false;
+                  
+                        _timeOfDay = TimeOfDay.now();
+                  
+                        _textController.clear(); 
+                        
+                        Navigator.pop(context);
+                        }
                               
-                        toDoItems.insert(
-                          0,
-                          {
-                            "time" : timePressed? _timeOfDay.format(context).toString(): '',
-                            "name" : _textController.text,
-                           "isChecked" : false,
-                            "isBool" : false
-                          }
-                        );
-                              
-                      itemCount++;
-                      
-                      timePressed = false;
-                
-                      _timeOfDay = TimeOfDay.now();
-                
-                      _textController.clear(); 
-                      
-                       Navigator.pop(context);
+                        
                               
                        notifyListeners();
                       }, 
